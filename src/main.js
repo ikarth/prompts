@@ -29,7 +29,7 @@ class Spin extends Phaser.Scene {
             fontWeight: 'bold',
             fontSize: '16px',
             //backgroundColor: '#221104',
-            color: '#FFFFFF',
+            color: '#FFB0FF',
             align: 'center',
             padding: {
                 top: 5, bottom: 5
@@ -40,7 +40,7 @@ class Spin extends Phaser.Scene {
             fontStyle: 'bold',
             fontSize: '32px',
             backgroundColor: '#330000',
-            color: '#FFFFFF',
+            color: '#FFA0FF',
             align: 'center',
             blendMode: Phaser.BlendModes.ADD,
             shadowBlur: 5,
