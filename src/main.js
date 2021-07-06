@@ -69,17 +69,18 @@ class Spin extends Phaser.Scene {
     }
 
     preload() {
-        //
+        this.load.json('themeData', 'assets/themes.json');
     }
 
     create() {
         // this.hitZone = this.add.sprite(game.config.width / 2.0, game.config.height / 2.0, 'spritesheet', 'invisible-box').setInteractive().setOrigin(0.5, 0.5);;
         // this.hitZone.width = game.config.width;
         // this.hitZone.height = game.config.height;
+        this.themes = this.cache.json.get('themeData');
 
-        this.themes = Phaser.Math.RND.shuffle(themes);
+        this.themes = Phaser.Math.RND.shuffle(this.themes);
         this.textWheel = [];
-        let prompt_step = 1.0 / themes.length;
+        let prompt_step = 1.0 / this.themes.length;
         let current_step = 0.0;
         this.textConfig = {
             fontFamily: 'Courier',
