@@ -1,69 +1,3 @@
-
-let themes = ["making bad art on mspaint",
-"playing my guitar",
-"analog video effects",
-"liquid lights", 
-"CRT glitch",
-"I used to play piano", 
-"picking up guitar",
-"go outside with friends",
-"cooking",
-"cooking without a recipe",
-"playing musical instruments",
-"sewing",
-"painting",
-"Fried Calamari",
-"singing and dancing",
-"making my own halloween costumes",
-"being a soccer fan",
-"watching the euros",
-"theater related stuff like acting/directing",
-"Baseball",
-"blåhaj",
-"basketball",
-"loving music more than anything else",
-"Music Production (EDM)",
-"working in a veterinary hospital",
-"photography",
-"basketball",
-"vlogs",
-"making videos",
-"playing trumpet",
-"the UCSC Wind ensemble",
-"I LOVE seafood!",
-"I love anime and animals",
-"I like doing handcrafts",
-"I like car stuff",
-"I like reading manga and watching anime",
-"Listening to music is my therapy",
-"playing sports",
-"biking",
-"Art is my main hobby",
-"I'm watching Twin Peaks",
-"I enjoy doing digital art",
-"I like listening and playing music",
-"I love motorcycles",
-"I love cafe racers",
-"working out",
-"I like to make comics",
-"sports/gym",
-"Origami!",
-"I do really enjoy anime",
-"3d printing",
-"I recently got into mixology",
-"I can play the drum set"];
-
-themes = [
-"Surprise",
-"Repair",
-"Growth",
-"Lost and found",
-"Signal Lost",
-"You Really Shouldn't Mix Those",
-"Limited Energy",
-"Mirror"];
-
-
 class Spin extends Phaser.Scene {
     constructor() {
         super("spinScene");
@@ -74,28 +8,29 @@ class Spin extends Phaser.Scene {
         this.pointerStart = 0.5;
         this.pointerEnd = 0.5;
         this.spin_cutoff = 0.000021;
-        
     }
 
     preload() {
-        //
+        this.load.json('themeData', 'assets/themes.json');
     }
 
     create() {
         // this.hitZone = this.add.sprite(game.config.width / 2.0, game.config.height / 2.0, 'spritesheet', 'invisible-box').setInteractive().setOrigin(0.5, 0.5);;
         // this.hitZone.width = game.config.width;
         // this.hitZone.height = game.config.height;
+        this.themes = this.cache.json.get('themeData');
 
-        this.themes = Phaser.Math.RND.shuffle(themes);
+        this.themes = Phaser.Math.RND.shuffle(this.themes);
         this.textWheel = [];
-        let prompt_step = 1.0 / themes.length;
+        let prompt_step = 1.0 / this.themes.length;
         let current_step = 0.0;
         this.textConfig = {
             fontFamily: 'Courier',
             fontWeight: 'bold',
             fontSize: '16px',
             //backgroundColor: '#221104',
-            color: '#ccccFF',
+            color: '#FFFF00',
+
             align: 'center',
             padding: {
                 top: 5, bottom: 5
@@ -106,7 +41,7 @@ class Spin extends Phaser.Scene {
             fontStyle: 'bold',
             fontSize: '32px',
             backgroundColor: '#330000',
-            color: '#F0F0F0',
+            color: '#FF00FF',
             align: 'center',
             blendMode: Phaser.BlendModes.ADD,
             shadowBlur: 5,
