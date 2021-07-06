@@ -12,14 +12,17 @@ class Spin extends Phaser.Scene {
     }
 
     preload() {
-        //
+        this.load.json('themesData', 'assets/themes.json');
     }
 
     create() {
+        this.themes = this.cache.json.get('themesData');
+        console.log(this);
+        debugger;
 
-        this.themes = Phaser.Math.RND.shuffle(themes);
+        this.themes = Phaser.Math.RND.shuffle(this.themes);
         this.textWheel = [];
-        let prompt_step = 1.0 / themes.length;
+        let prompt_step = 1.0 / this.themes.length;
         let current_step = 0.0;
         this.textConfig = {
             fontFamily: 'Courier',
