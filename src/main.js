@@ -2,8 +2,8 @@ class Spin extends Phaser.Scene {
     constructor() {
         super("spinScene");
         this.spin = 0.00001;
-        this.max_spin = 0.1;
-        this.min_spin = 0.001;
+        this.max_spin = 0.17;
+        this.min_spin = 0.0009;
         this.spin_position = 0.3;
         this.pointerStart = 0.5;
         this.pointerEnd = 0.5;
@@ -26,7 +26,7 @@ class Spin extends Phaser.Scene {
             fontWeight: 'bold',
             fontSize: '16px',
             //backgroundColor: '#221104',
-            color: '#FFFFFF',
+            color: '#ccccFF',
             align: 'center',
             padding: {
                 top: 5, bottom: 5
@@ -37,7 +37,7 @@ class Spin extends Phaser.Scene {
             fontStyle: 'bold',
             fontSize: '32px',
             backgroundColor: '#330000',
-            color: '#FFFFFF',
+            color: '#F0F0F0',
             align: 'center',
             blendMode: Phaser.BlendModes.ADD,
             shadowBlur: 5,
@@ -117,7 +117,7 @@ class Spin extends Phaser.Scene {
 let config = {
     type: Phaser.CANVAS,
     width: 800,
-    height: 680,
+    height: 360,
     scene: [Spin],
     numberOfPrompts: 5
 }
