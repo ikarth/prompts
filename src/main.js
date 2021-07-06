@@ -53,6 +53,15 @@ let themes = ["making bad art on mspaint",
 "I recently got into mixology",
 "I can play the drum set"];
 
+themes = [
+"Surprise",
+"Repair",
+"Growth",
+"Lost and found",
+"Signal Lost",
+"You Really Shouldn't Mix Those",
+"Limited Energy",
+"Mirror"];
 
 
 class Spin extends Phaser.Scene {
@@ -199,7 +208,7 @@ class Spin extends Phaser.Scene {
 let config = {
     type: Phaser.CANVAS,
     width: 800,
-    height: 680,
+    height: 360,
     scene: [Spin],
     numberOfPrompts: 5
 }
