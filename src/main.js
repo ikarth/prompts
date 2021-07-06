@@ -1,60 +1,3 @@
-
-let themes = ["making bad art on mspaint",
-"playing my guitar",
-"analog video effects",
-"liquid lights", 
-"CRT glitch",
-"I used to play piano", 
-"picking up guitar",
-"go outside with friends",
-"cooking",
-"cooking without a recipe",
-"playing musical instruments",
-"sewing",
-"painting",
-"Fried Calamari",
-"singing and dancing",
-"making my own halloween costumes",
-"being a soccer fan",
-"watching the euros",
-"theater related stuff like acting/directing",
-"Baseball",
-"blåhaj",
-"basketball",
-"loving music more than anything else",
-"Music Production (EDM)",
-"working in a veterinary hospital",
-"photography",
-"basketball",
-"vlogs",
-"making videos",
-"playing trumpet",
-"the UCSC Wind ensemble",
-"I LOVE seafood!",
-"I love anime and animals",
-"I like doing handcrafts",
-"I like car stuff",
-"I like reading manga and watching anime",
-"Listening to music is my therapy",
-"playing sports",
-"biking",
-"Art is my main hobby",
-"I'm watching Twin Peaks",
-"I enjoy doing digital art",
-"I like listening and playing music",
-"I love motorcycles",
-"I love cafe racers",
-"working out",
-"I like to make comics",
-"sports/gym",
-"Origami!",
-"I do really enjoy anime",
-"3d printing",
-"I recently got into mixology",
-"I can play the drum set"];
-
-
-
 class Spin extends Phaser.Scene {
     constructor() {
         super("spinScene");
@@ -73,9 +16,6 @@ class Spin extends Phaser.Scene {
     }
 
     create() {
-        // this.hitZone = this.add.sprite(game.config.width / 2.0, game.config.height / 2.0, 'spritesheet', 'invisible-box').setInteractive().setOrigin(0.5, 0.5);;
-        // this.hitZone.width = game.config.width;
-        // this.hitZone.height = game.config.height;
 
         this.themes = Phaser.Math.RND.shuffle(themes);
         this.textWheel = [];
@@ -118,9 +58,6 @@ class Spin extends Phaser.Scene {
         }
         this.primeText = this.add.text(game.config.width / 2.0, game.config.height / 2.0, "Prompt", this.textConfigBig).setOrigin(0.5, 0.5);
 
-        
-        //this.input.setDraggable(this.hitZone);
-
         this.input.on('pointerdown', (pointer) => {
             this.cameras.main.setBackgroundColor("#770000");
             this.pointerStart = pointer.y / game.config.height;
@@ -133,29 +70,11 @@ class Spin extends Phaser.Scene {
             this.pointerEnd = 0.5;
         });
 
-        // this.input.on('dragstart', function (pointer, gameObject) {
-        //     gameObject.setTint(0x55ff55);
-        //     console.log('dragstart');
-        //     this.cameras.main.setBackgroundColor("#770000");
-        // });
-        // this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-        //     gameObject.setTint(0x55ff55);
-        //     console.log('drag');
-        // });
-        // this.input.on('dragend', function (pointer, gameObject) {
-        //     gameObject.clearTint();
-        //     console.log('dragend');
-        //     this.cameras.main.setBackgroundColor("#000000");
-        // });
 
     }
 
     update(time, delta) {
-        // let pointer = scene.input.activePointer;
-        // if(pointer.isDown) {
-        //     scene.cameras.main.setBackgroundColor("#770000");
-        // }
-        
+
         if (Math.abs(this.pointerStart - this.pointerEnd) > 0.1) {
             this.spin = 1.0 * (this.pointerStart - this.pointerEnd) * 0.003;
         }
