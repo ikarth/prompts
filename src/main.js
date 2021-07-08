@@ -3,7 +3,7 @@ class Spin extends Phaser.Scene {
         super("spinScene");
         this.spin = 0.00001;
         this.max_spin = 0.31;
-        this.min_spin = 0.0005;
+        this.min_spin = 0.05;
         this.spin_position = 0.3;
         this.pointerStart = 0.5;
         this.pointerEnd = 0.5;
