@@ -25,7 +25,7 @@ class Spin extends Phaser.Scene {
         this.textConfig = {
             fontFamily: 'Courier',
             fontWeight: 'bold',
-            fontSize: '16px',
+            fontSize: '24px',
             //backgroundColor: '#221104',
             color: '#FFB0FF',
             color: '#ccccFF',
@@ -37,7 +37,7 @@ class Spin extends Phaser.Scene {
         this.textConfigBig = {
             fontFamily: 'Courier',
             fontStyle: 'bold',
-            fontSize: '32px',
+            fontSize: '38px',
             backgroundColor: '#330000',
             color: '#FFA0FF',
             color: '#F0F0F0',
