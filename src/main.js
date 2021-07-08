@@ -2,8 +2,8 @@ class Spin extends Phaser.Scene {
     constructor() {
         super("spinScene");
         this.spin = 0.00001;
-        this.max_spin = 0.21;
-        this.min_spin = 0.001;
+        this.max_spin = 0.31;
+        this.min_spin = 0.0005;
         this.spin_position = 0.3;
         this.pointerStart = 0.5;
         this.pointerEnd = 0.5;
@@ -120,7 +120,7 @@ class Spin extends Phaser.Scene {
 let config = {
     type: Phaser.CANVAS,
     width: 800,
-    height: 360,
+    height: 260,
     scene: [Spin],
     numberOfPrompts: 5
 }
