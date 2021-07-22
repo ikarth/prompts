@@ -13,10 +13,46 @@ class Spin extends Phaser.Scene {
 
     preload() {
         this.load.json('themesData', 'assets/themes.json');
+        this.load.audio('tick', 'assets/tick.mp3');
+        this.load.audio('winner', 'assets/winner.mp3');
+        //this.load.image('particle_star', 'assets/star_08.png');
+        this.load.spritesheet('particle_star', 'assets/sparks.png', {frameWidth: 32, frameHeight: 32});
     }
 
     create() {
+        this.soundplay = -1;
+        this.soundTick = this.sound.add('tick');
+        this.soundWin = this.sound.add('winner');
+
+        this.spawnZone = new Phaser.Geom.Ellipse(game.config.width/2, game.config.height/2, 180.0, 40.0);
+        this.particleStarManager = this.add.particles('particle_star');
+        this.starEmitter = this.particleStarManager.createEmitter({
+             x: game.config.width / 2,
+             y: game.config.height / 2,
+             frequency: -1,
+//             scale: { start: 0.01, end: 1.0, ease: Phaser.Math.Easing.Bounce.InOut },
+//             angle: {min: -180, max: 180},
+             rotate: {min: -180, max: 180},
+             speed: {random: [50.0, 400.0]},
+//             //acceleration: {random: [100.0, 400.0]},
+             tint: 0xff001011, //{min: 0xff0064, max: 0xff0000},
+             alpha: {min: 1.0, max: 0.0, ease: Phaser.Math.Easing.Bounce.InOut}, 
+             blendMode: 'ADD',
+//             on: true,
+//             active: true,
+            gravityY: 100.0,
+            frame: Phaser.Utils.Array.NumberArray(0, 7),
+            lifespan: {random: [100, 8000]}
+        });
+        console.log(this.starEmitter);
+        this.particleStarManager.setDepth(300);
+        //this.starEmitter.explode(2000);
+
         this.themes = this.cache.json.get('themesData');
+
+        if(!this.themes) {
+            this.themes = ["ERROR IN JSON","ERROR IN JSON","You probably have an\nextra comma in the file","ERROR IN JSON","ERROR IN JSON","You probably have an\nextra comma in the file"];
+        }
 
         this.themes = Phaser.Math.RND.shuffle(this.themes);
         this.textWheel = [];
@@ -71,12 +107,16 @@ class Spin extends Phaser.Scene {
             this.spin += this.min_spin + (Math.abs(this.pointerStart - this.pointerEnd) * 0.005);
             this.pointerStart = 0.5;
             this.pointerEnd = 0.5;
+            this.soundplay = 0;
         });
 
 
     }
 
     update(time, delta) {
+        if (this.soundplay == 1) {
+            this.soundplay = 0;
+        }
 
         if (Math.abs(this.pointerStart - this.pointerEnd) > 0.1) {
             this.spin = 1.0 * (this.pointerStart - this.pointerEnd) * 0.003;
@@ -91,9 +131,13 @@ class Spin extends Phaser.Scene {
 
         this.spin *= 0.99; // friction, decay over time
         if (Math.abs(this.spin) < this.spin_cutoff) {
+            if (this.soundplay >= 0) {
+                this.soundplay = 2;
+            }
             this.spin = 0; // stop if we get too low
             this.primeText.setAlpha(1.0);
             this.cameras.main.setBackgroundColor("#000000");
+            
         } else {
             this.primeText.setAlpha(0.8 - (Math.abs(this.spin) * 0.8));
             this.cameras.main.setBackgroundColor("#770000");
@@ -111,7 +155,21 @@ class Spin extends Phaser.Scene {
                 if(brightness > 0.99) {
                     this.primeText.text = txt.text;
                     center_count += 1;
+                    this.soundplay = Math.max(this.soundplay, 1);
                 }
+            }
+        }
+        if (this.soundplay > 0) {
+            if(this.soundplay > 1) {
+                this.soundWin.play();
+                this.starEmitter.explode(2000);
+                this.soundplay = -1;
+            } else {
+                this.soundTick.setDetune(Phaser.Math.FloatBetween(0.0, 1000.0) - (this.spin * 1000.0));
+                if (!this.soundTick.isPlaying) {
+                    this.soundTick.play();
+                }
+                this.soundplay = 0;
             }
         }
     }
